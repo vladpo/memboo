@@ -1,0 +1,21 @@
+allow url *
+allow mime *
+allow responseHeader *
+allow requestHeader *
+allow meta *
+rewrite all Js/*
+rewrite style Css/*
+rewrite url Main/main
+rewrite url Main/*
+minHeap 134217728
+lessSafeFfi
+library bootstrap/bootstrap4
+script https://www.googletagmanager.com/gtag/js?id=UA-123401300-1
+script /js/googleAnalytics.js
+
+$/list
+$/monad
+$/option
+js
+css
+main
