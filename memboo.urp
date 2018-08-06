@@ -3,15 +3,15 @@ allow mime *
 allow responseHeader *
 allow requestHeader *
 allow meta *
+library bootstrap/bootstrap4
+library urscript
 rewrite all Js/*
 rewrite style Css/*
 rewrite url Main/main
 rewrite url Main/*
+rewrite url Bootstrap4/*
 minHeap 134217728
 lessSafeFfi
-library bootstrap/bootstrap4
-script https://www.googletagmanager.com/gtag/js?id=UA-123401300-1
-script /js/googleAnalytics.js
 
 $/list
 $/monad
