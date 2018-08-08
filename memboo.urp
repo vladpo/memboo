@@ -10,8 +10,6 @@ rewrite all Js/*
 rewrite style Css/*
 rewrite url Main/main
 rewrite url Main/*
-rewrite url Bootstrap4/*
-rewrite url Fontawesome/*
 minHeap 134217728
 lessSafeFfi
 

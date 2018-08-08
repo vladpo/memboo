@@ -1,4 +1,3 @@
-rewrite style Fontawesome/fa* fa [-]
-rewrite style Fontawesome/* [-]
+rewrite style Fontawesome/s_* [-]
 
 fontawesome

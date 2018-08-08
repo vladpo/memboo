@@ -1,4 +1,3 @@
-rewrite style Bootstrap4/glyphicon* fa [-]
 rewrite style Bootstrap4/bs_*
 rewrite style Bootstrap4/* [-]
 
