@@ -1,0 +1,29 @@
+upstream memboo {
+  server localhost:9999;
+}
+
+server {
+    listen                        80 default_server;
+    listen                        [::]:80 default_server ipv6only=on;
+    listen                        443 ssl;
+
+    server_name                   www.memboo.ro memboo.ro;
+    root                          /var/www/memboo/static/;
+
+    location / {
+      try_files $uri @memboo;
+    }
+
+    location @memboo {
+      proxy_pass                  http://memboo;
+      proxy_set_header            Host $host;
+      proxy_set_header            X-Real-IP $remote_addr;
+      proxy_set_header            X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_connect_timeout       150;
+      proxy_send_timeout          100;
+      proxy_read_timeout          100;
+      proxy_buffers               4 32k;
+      client_max_body_size        8m; 
+      client_body_buffer_size     128k;
+    }   
+}

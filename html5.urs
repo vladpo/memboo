@@ -1,0 +1,1 @@
+val video: bodyTag boxAttrs
