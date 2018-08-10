@@ -2,8 +2,20 @@
 open Css
 structure Bs4 = Bootstrap4
 structure FA = Fontawesome
+structure Plx = Parallax
 
 fun js url = return (Script.insert (blessMime "text/javascript") (bless url))
+
+fun handler r = return <xml><body>
+    <table>
+    <tr> <th>Full name:</th> <td>{[r.FullName]}</td> </tr>
+    <tr> <th>Phone:</th> <td>{[r.Phone]}</td> </tr>
+    <tr> <th>Email:</th> <td>{[r.Email]}</td> </tr>
+    <tr> <th>People:</th> <td>{[r.People]}</td> </tr>
+    <tr> <th>Date:</th> <td>{[r.Date]}</td> </tr>
+    <tr> <th>ClientType:</th> <td>{[r.ClientType]}</td> </tr>
+  </table>
+  </body></xml>
 
 fun main () = 
   gaScript <- js "https://www.googletagmanager.com/gtag/js?id=UA-123401300-1";
@@ -11,7 +23,16 @@ fun main () =
   jquery <- js "https://code.jquery.com/jquery-3.2.1.slim.min.js";
   popper <- js "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js";
   bootstrap <- js "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js";
+  parallax <- js "/parallax.min.js";
   id <- fresh;
+  sectionQuoteId <- fresh;
+  quoteFormId <- fresh;
+  quoteFormNameId <- fresh;
+  quoteFormPhoneId <- fresh;
+  quoteFormEmailId <- fresh;
+  quoteFormPeopleId <- fresh;
+  quoteFormDateId <- fresh;
+  quoteFormClientType <- fresh;
   return 
     <xml>
       <head>
@@ -31,11 +52,9 @@ fun main () =
         {jquery}
         {popper}
         {bootstrap}
+        {parallax}
       </head>
       <body data-spy="scroll" data-offset="71" data-target=".navbar:visible">
-        <div class={Css.mirror}>
-          <img class={Css.slider} width=1920 height=1080 src={bless "/main.jpg"}/>
-        </div>
         <nav class={classes (classes Bs4.navbar Bs4.navbar_expand_lg) (classes Bs4.fixed_top Bs4.navbar_light)}>
           <div class={Bs4.container}>
             <a class={classes Bs4.navbar_brand Bs4.d_lg_none} href="/">Memboo</a>
@@ -66,7 +85,7 @@ fun main () =
             </div>
           </div>
         </nav>
-        <div class={classes Css.section Css.sectionIntro} data-parallax="scroll" data-image-src="/main.jpg">
+        <section class={classes Css.css_section Css.sectionIntro} data-parallax="scroll" data-image-src="/main.jpg">
           <div class={Css.sectionIntroMid}>
             <div class={Bs4.container}>
               <div class={classes Bs4.row Css.alignCenter}>
@@ -78,7 +97,7 @@ fun main () =
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non illo, alias animi iusto neque, sint corrupti? Laudantium, dignissimos id excepturi facilis, facere saepe quasi placeat praesentium ipsa sapiente illo molestiae?
                   </p>
                   <div class={Bs4.text_center}>
-                    <a href="#oferta" class={classes Bs4.btn (classes Bs4.btn_primary Css.textWhite)}>
+                    <a href={bless(strcat "#" (show sectionQuoteId))} class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)}>
                       Aplica pentru o oferta
                     </a>
                   </div>
@@ -93,29 +112,145 @@ fun main () =
                   <ul class={classes Css.sectionIntroFooterSocial (classes Bs4.text_center Css.textLgLeft)}>
                     <li>
                       <a href="#">
-                        <i class={classes FA.s_fa FA.s_fa_twitter}></i>
+                        <i class={classes FA.fab FA.fa_twitter}></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class={classes FA.s_fa FA.s_fa_facebook}></i>
+                        <i class={classes FA.fab FA.fa_facebook}></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class={classes FA.s_fa FA.s_fa_instagram}></i>
+                        <i class={classes FA.fab FA.fa_instagram}></i>
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div class={Css.colMd}>
                   <div class={classes Css.sectionIntroFooterAddr (classes Bs4.text_center Css.textLgRight)}>
-                    <i class={classes FA.s_fa FA.s_fa_map_marker}></i> Cluj-Napoca, Dorobantilor 105, 54005
+                    <i class={classes FA.fa FA.fa_map_marker}></i> Cluj-Napoca, Dorobantilor 105, 54005
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+        <section class={classes Css.css_section (classes Css.sectionHardware Css.sectionNoPaddingBottom)}>
+          <div class={Bs4.container}>
+            <div class={Bs4.row}>
+              <div class={classes Bs4.col_md_2 Css.alignSelfStart}>
+                <p class={Css.sectionHardwareDesc}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </p>
+              </div>
+              <div class={classes Bs4.col_md_4 Css.alignSelfStart}>
+                <div class={Css.sectionHardwareImg}>
+                  <img src="/m1.png" class={Css.imgFluid} alt="..."/>
+                </div>
+              </div>
+              <div class={classes Bs4.col_md_6 Css.alignSelfCenter}>
+                <h2><em>Lorem ipsum</em> dolor sit amet</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis nisi, consequatur, laborum libero a neque ducimus. Porro rem illum quo nostrum quisquam asperiores, blanditiis, consectetur. Possimus facilis velit, voluptatibus!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class={classes Css.css_section Css.sectionHardware}>
+          <div class={Bs4.container}>
+            <div class={Bs4.row}>
+              <div class={classes Bs4.col_md_2 (classes Css.order2 Css.alignSelfEnd)}>
+                <p class={Css.sectionHardwareDesc}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </p>
+              </div>
+              <div class={classes Bs4.col_md_4 (classes Css.order3 Css.alignSelfStart)}>
+                <div class={Css.sectionHardwareImg}>
+                  <img src="/m2.jpg" class={Css.imgFluid} alt="..."/>
+                </div>
+              </div>
+              <div class={classes Bs4.col_md_6 (classes Css.order1 Css.alignSelfCenter)}>
+                <h2><em>Lorem ipsum</em> dolor sit amet</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis nisi, consequatur, laborum libero a neque ducimus. Porro rem illum quo nostrum quisquam asperiores, blanditiis, consectetur. Possimus facilis velit, voluptatibus!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class={classes Css.css_section Css.sectionGray} id={sectionQuoteId}>
+          <div class={Bs4.container}>
+            <div class={Bs4.row}>
+              <div class={Css.col}>
+                <h2 class={classes Css.sectionTitle Bs4.text_center}>
+                Cere o ofera
+                </h2>
+                <p class={classes Css.sectionDescription Bs4.text_center}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
+                </p>
+              </div>
+            </div>
+            <div class={classes Bs4.row (classes Bs4.justify_content_lg_center Css.sectionQuoteRow)}>
+              <div class={Bs4.col_lg_8}>
+                <form id={quoteFormId}>
+                  <div class={Bs4.row}>
+                    <div class={Bs4.col_md_6}>
+                      <div class={Bs4.form_group}>
+                        <label for={quoteFormNameId}/>
+                        <textbox{#FullName} class={Bs4.form_control} id={quoteFormNameId} placeholder="Nume si prenume"/>
+                        <div class={Bs4.invalid_feedback}></div>
+                      </div>
+                      <div class={Bs4.form_group}>
+                        <label class={Bs4.sr_only} for={quoteFormPhoneId}>Numar de telefon</label>
+                        <tel{#Phone} class={Bs4.form_control} id={quoteFormPhoneId} placeholder="Numar de telefon"/>
+                        <div class={Bs4.invalid_feedback}></div>
+                      </div>
+                      <div class={Bs4.form_group}>
+                        <label class={Bs4.sr_only} for={quoteFormEmailId}>Adresa de email</label>
+                        <email{#Email} class={Bs4.form_control} id={quoteFormEmailId} placeholder="Adresa de email"/>
+                        <div class={Bs4.invalid_feedback}></div>
+                      </div>
+                    </div>
+                    <div class={Bs4.col_md_6}>
+                      <div class={Bs4.form_group}>
+                        <label class={Bs4.sr_only} for={quoteFormPeopleId}>Numar persoane aprox.</label>
+                        <select{#People} class={Bs4.form_control} id={quoteFormPeopleId}>
+                          <option value="1">1-50 persoane</option>
+                          <option value="2">50-100 persoane</option>
+                          <option value="3">100-150 persoane</option>
+                          <option value="4">150-200 persoane</option>
+                          <option value="5">200+ persoane</option>
+                        </select>
+                        <div class={Bs4.invalid_feedback}></div>
+                      </div>
+                      <div class={Bs4.form_group}>
+                        <label class={Bs4.sr_only} for={quoteFormDateId}>Data</label>
+                        <date{#Date} class={Bs4.form_control} id={quoteFormDateId}/>
+                        <div class={Bs4.invalid_feedback}></div>
+                      </div>
+                      <div class={Bs4.form_group}>
+                        <label class={Bs4.sr_only} for={quoteFormClientType}>Persoana fizica sau Companie</label>
+                        <select{#ClientType} class={Bs4.form_control} id={quoteFormClientType}>
+                          <option value="1">Persoana fizica</option>
+                          <option value="2">Companie</option>
+                        </select>
+                        <div class={Bs4.invalid_feedback}></div>
+                      </div>
+                    </div>
+                    <div class={Css.col}>
+                      <div class={Bs4.text_center}>
+                        <submit class={classes Bs4.btn Bs4.btn_primary} action={handler}>
+                          Cere ofera
+                        </submit>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
       </body>
     </xml>

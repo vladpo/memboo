@@ -595,3 +595,5 @@ style mr_auto
 style d_none
 style d_lg_flex
 style ml_auto
+style invalid_feedback
+style justify_content_lg_center

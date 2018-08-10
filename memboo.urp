@@ -5,9 +5,10 @@ allow requestHeader *
 allow meta *
 library bootstrap/bootstrap4
 library fontawesome/fontawesome
+library parallax/parallax
 library urscript
 rewrite all Js/*
-rewrite style Css/*
+rewrite style Css/* [-]
 rewrite url Main/main
 rewrite url Main/*
 minHeap 134217728

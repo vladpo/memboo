@@ -1,5 +1,6 @@
-style s_fa
-style s_fa_twitter
-style s_fa_instagram
-style s_fa_facebook
-style s_fa_map_marker
+style fa
+style fab
+style fa_twitter
+style fa_instagram
+style fa_facebook
+style fa_map_marker
