@@ -29,3 +29,8 @@ style order3
 style sectionNoPaddingBottom
 style sectionGray
 style sectionQuoteRow
+style borderBottom
+style sectionFeedbackQuote
+style sectionFeedbackPhoto
+style sectionFeedbackItem
+style sectionFeedback

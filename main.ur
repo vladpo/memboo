@@ -1,8 +1,10 @@
 
 open Css
+open Tags
 structure Bs4 = Bootstrap4
 structure FA = Fontawesome
 structure Plx = Parallax
+structure Flky = Flickity
 
 fun js url = return (Script.insert (blessMime "text/javascript") (bless url))
 
@@ -19,11 +21,12 @@ fun handler r = return <xml><body>
 
 fun main () = 
   gaScript <- js "https://www.googletagmanager.com/gtag/js?id=UA-123401300-1";
-  initGaScript <- js "/scripts.js";
+  scripts <- js "/scripts.js";
   jquery <- js "https://code.jquery.com/jquery-3.2.1.slim.min.js";
   popper <- js "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js";
   bootstrap <- js "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js";
   parallax <- js "/parallax.min.js";
+  flickity <- js "/flickity.pkgd.min.js";
   id <- fresh;
   sectionQuoteId <- fresh;
   quoteFormId <- fresh;
@@ -44,15 +47,17 @@ fun main () =
         <meta name="msapplication-config" content="http://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/fav/browserconfig.xml"/>
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//s.w.org" />
-        {gaScript}
-        {initGaScript}
+        {gaScript}        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
         <link rel="stylesheet" href="/style.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="/flickity.min.css"/>
         {jquery}
         {popper}
         {bootstrap}
         {parallax}
+        {flickity}
+        {scripts}
       </head>
       <body data-spy="scroll" data-offset="71" data-target=".navbar:visible">
         <nav class={classes (classes Bs4.navbar Bs4.navbar_expand_lg) (classes Bs4.fixed_top Bs4.navbar_light)}>
@@ -185,7 +190,7 @@ fun main () =
             <div class={Bs4.row}>
               <div class={Css.col}>
                 <h2 class={classes Css.sectionTitle Bs4.text_center}>
-                Cere o ofera
+                Cere o oferta
                 </h2>
                 <p class={classes Css.sectionDescription Bs4.text_center}>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
@@ -198,7 +203,7 @@ fun main () =
                   <div class={Bs4.row}>
                     <div class={Bs4.col_md_6}>
                       <div class={Bs4.form_group}>
-                        <label for={quoteFormNameId}/>
+                        <label class={Bs4.sr_only} for={quoteFormNameId}>Nume si prenume</label>
                         <textbox{#FullName} class={Bs4.form_control} id={quoteFormNameId} placeholder="Nume si prenume"/>
                         <div class={Bs4.invalid_feedback}></div>
                       </div>
@@ -241,13 +246,113 @@ fun main () =
                     </div>
                     <div class={Css.col}>
                       <div class={Bs4.text_center}>
-                        <submit class={classes Bs4.btn Bs4.btn_primary} action={handler}>
-                          Cere ofera
-                        </submit>
+                        <submit class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)} action={handler} value="Trimite"></submit>
                       </div>
                     </div>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class={classes Css.css_section Css.borderBottom}>
+          <div class={Bs4.container}>
+            <div class={Bs4.row}>
+              <div class={Css.col}>
+                <h2 class={classes  Css.sectionTitle Bs4.text_center}>
+                  Parerea clientilor nostri conteaza
+                </h2>
+                <p class={classes Css.sectionDescription Bs4.text_center}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </p>
+        
+              </div>
+            </div>
+            <div class={Bs4.row}>
+              <div class={Css.col}>
+                <div class={classes Css.sectionFeedback (classes Flky.flickity_enabled Flky.is_draggable)}>
+                  <div class={Flky.flickity_viewport}>
+                    <div class={Flky.flickity_slider}>
+                      <div class={classes Css.sectionFeedbackItem (classes Bs4.text_center Bs4.text_md_left)} style="position: absolute; left: 0%;">
+                        <div class={classes Bs4.row Css.alignCenter}>
+                          <div class={classes Bs4.col_md_3 Bs4.order_md_3}>
+                            <div class={Css.sectionFeedbackPhoto}>
+                              <img src="/bebe1.png" class={Flky.img_fluid} alt="..."/>
+                            </div>
+                          </div>
+                          <div class={classes Bs4.col_md_7 Bs4.order_md_2}>
+                            <blockquote class={classes Css.sectionFeedbackQuote Bs4.mx_auto}>
+                              <p>
+                                Taticul meu e un om de incredere si cu suflet bun. Face poze de neuitat dar nu pe gratis, ca are si el nevoie de bani sa-mi cumpere jucarii.
+                              </p>
+                              <footer class={Bs4.text_muted}>
+                                Matei Popovici
+                              </footer>
+                            </blockquote>
+                          </div>
+                          <div class={classes Bs4.col_md_1 Bs4.order_md_1}></div>
+                        </div>
+                      </div>
+                      <div class={classes Css.sectionFeedbackItem (classes Bs4.text_center (classes Bs4.text_md_left Flky.is_selected))} style="position: absolute; left: 100%;">
+                        <div class={classes Bs4.row Css.alignCenter}>
+                          <div class={classes Bs4.col_md_3 Bs4.order_md_3}>
+                            <div class={Css.sectionFeedbackPhoto}>
+                              <img src="/bebe2.png" class={Flky.img_fluid} alt="..."/>
+                            </div>
+                          </div>
+                          <div class={classes Bs4.col_md_7 Bs4.order_md_2}>
+                            <blockquote class={classes Css.sectionFeedbackQuote Bs4.mx_auto}>
+                              <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos at veritatis vitae modi ex quis quibusdam error repudiandae adipisci dolore perspiciatis iste, vel fuga a, libero architecto ratione deleniti sequi.
+                              </p>
+                              <footer class={Bs4.text_muted}>
+                                Matei Popovici
+                              </footer>
+                            </blockquote>
+                          </div>
+                          <div class={classes Bs4.col_md_1 Bs4.order_md_1}></div>
+                        </div>
+                      </div>
+                      <div class={classes Css.sectionFeedbackItem (classes Bs4.text_center Bs4.text_md_left)} style="position: absolute; left: 200%;">
+                        <div class={classes Bs4.row Css.alignCenter}>
+                          <div class={classes Bs4.col_md_3 Bs4.order_md_3}>
+                            <div class={Css.sectionFeedbackPhoto}>
+                              <img src="/bebe3.png" class={Flky.img_fluid} alt="..."/>
+                            </div>
+                          </div>
+                          <div class={classes Bs4.col_md_7 Bs4.order_md_2}>
+                            <blockquote class={classes Css.sectionFeedbackQuote Bs4.mx_auto}>
+                              <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos at veritatis vitae modi ex quis quibusdam error repudiandae adipisci dolore perspiciatis iste, vel fuga a, libero architecto ratione deleniti sequi.
+                              </p>
+                              <footer class={Bs4.text_muted}>
+                                Matei Popovici
+                              </footer>
+                            </blockquote>
+                          </div>
+                          <div class={classes Bs4.col_md_1 Bs4.order_md_1}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class={classes Flky.flickity_prev_next_button Flky.previous} aria-label="previous">
+                    <svg viewBox="0 0 100 100">
+                      <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class={Bs4.arrow}>
+                      </path>
+                    </svg>
+                  </button>
+                  <button class={classes Flky.flickity_prev_next_button Flky.next} aria-label="next">
+                    <svg viewBox="0 0 100 100">
+                      <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class={Bs4.arrow} transform="translate(100, 100) rotate(180) ">
+                      </path>
+                    </svg>
+                  </button>
+                  <ol class={Flky.flickity_page_dots}>
+                    <li class={Flky.dot}></li>
+                    <li class={classes Flky.dot Flky.is_selected}></li>
+                    <li class={Flky.dot}></li>
+                  </ol>
+                </div>
               </div>
             </div>
           </div>
