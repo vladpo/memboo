@@ -155,6 +155,7 @@ address, dl, ol, ul {
 .sectionIntroFooterSocial {
 	padding-left:0;
 	list-style-type:none;
+	margin-left:2rem;
 }
 
 @media (min-width:768px) {
@@ -174,10 +175,6 @@ address, dl, ol, ul {
 
 .sectionIntroFooterSocial>li>a:active,.sectionIntroFooterSocial>li>a:active:focus,.sectionIntroFooterSocial>li>a:active:hover,.sectionIntroFooterSocial>li>a:focus,.sectionIntroFooterSocial>li>a:hover {
 	color:#f5a637;
-}
-
-.sectionIntroFooterSocial>li+li {
-	margin-left:2rem;
 }
 
 .sectionIntroFooterAddr {

@@ -12,6 +12,9 @@ library $/mail
 rewrite all Js/*
 rewrite style Css/*
 rewrite url Main/main
+rewrite url Main/aboutUsPage despre-noi
+rewrite url Main/galleryPage galerie
+rewrite url Main/contactPage contact
 rewrite url Main/*
 minHeap 134217728
 lessSafeFfi
