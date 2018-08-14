@@ -13,8 +13,9 @@ body {
     background-color: #fff;
 }
 
-.css-section, body {
-	position: relative;
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 img {
@@ -26,12 +27,24 @@ svg:not(:root) {
     overflow: hidden;
 }
 
+.css-section, body {
+	position: relative;
+}
+
 [type=reset], [type=submit], button, html [type=button] {
     -webkit-appearance: button;
 }
 
 button, select {
     text-transform: none;
+}
+
+dl, ol, ul {
+    margin-top: 0;
+}
+
+address, dl, ol, ul {
+    margin-bottom: 1rem;
 }
 
 .btn-primary {
@@ -292,11 +305,32 @@ button, select {
 
 .navbar {
     min-height: 70px;
+}
+
+.navbar-light {
     background-color: transparent;
 }
 
-.navbar-light:before {
-	transform: translateY(0);
+.navbar-dark {
+    background-color: transparent;
+}
+
+.navbar-dark:before {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.navbar-dark .navbar-brand {
+    color: #151515;
+}
+
+.navbar-dark .navbar-toggler {
+    color: #151515;
+    border-color: transparent;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #151515;
 }
 
 .sectionGray {
@@ -310,7 +344,7 @@ button, select {
 	}
 }
 
-.sectionFeedbackItem {
+.sectionFeedback__carousel__item {
 	width:100%;
 }
 
@@ -352,21 +386,50 @@ button, select {
     background-color: #fff;
 }
 
-.flickity-prev-next-button:before {
-    font-family: FontAwesome;
-    font-size: 2rem;
+.sectionFooter {
+	background-color: #151515;
+}
+
+@media (min-width: 768px)
+.sectionFooter [class*=col] {
+    padding: 0 2rem;
+}
+
+@media (min-width: 768px)
+.sectionFooterTitle {
+    margin-top: 0;
+}
+
+.sectionFooterTitle {
+    font-family: Lato,sans-serif;
+    font-size: .75rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: #f5a637;
+}
+
+.sectionFooterDesc {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.sectionFooterDesc>li>i {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    content: "\f104";
-    -webkit-transform: translate(-75%,-50%);
-    transform: translate(-75%,-50%);
+    top: .4em;
+    left: 0;
 }
 
-.flickity-prev-next-button .arrow {
-    display: none;
+.sectionFooterDesc>li+li {
+    margin-top: .5rem;
+}
+.sectionFooterDesc>li {
+    position: relative;
+    padding-left: 2rem;
 }
 
-.flickity-prev-next-button .arrow {
-    fill: #333;
+.sectionFooter a, .sectionFooter a:active, .sectionFooter a:active:focus, .sectionFooter a:active:hover, .sectionFooter a:focus, .sectionFooter a:hover {
+    color: #777;
 }

@@ -6,13 +6,16 @@ allow meta *
 library bootstrap/bootstrap4
 library fontawesome/fontawesome
 library parallax/parallax
+library flickity/flickity
 library urscript
+library $/mail
 rewrite all Js/*
-rewrite style Css/* [-]
+rewrite style Css/*
 rewrite url Main/main
 rewrite url Main/*
 minHeap 134217728
 lessSafeFfi
+ffi tags
 
 $/list
 $/monad

@@ -29,3 +29,17 @@ style order3
 style sectionNoPaddingBottom
 style sectionGray
 style sectionQuoteRow
+style borderBottom
+style sectionFeedbackQuote
+style sectionFeedbackPhoto
+style sectionFeedbackItem
+style sectionFeedback__carousel
+style sectionFeedback__carousel__item
+style sectionFooter
+style sectionFooterTitle
+style sectionFooterDesc
+style sectionFooterOpen
+style sectionFooterTime
+style sectionFooterOpenDays
+style sectionFooterOpenTime
+style sectionFooterCopyright

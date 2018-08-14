@@ -597,3 +597,10 @@ style d_lg_flex
 style ml_auto
 style invalid_feedback
 style justify_content_lg_center
+style text_md_left
+style order_md_3
+style order_md_2
+style order_md_1
+style mx_auto
+style arrow
+style col_12

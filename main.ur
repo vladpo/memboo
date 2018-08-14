@@ -1,29 +1,38 @@
 
 open Css
+open Tags
+open Mail
 structure Bs4 = Bootstrap4
 structure FA = Fontawesome
 structure Plx = Parallax
+structure Flky = Flickity
 
-fun js url = return (Script.insert (blessMime "text/javascript") (bless url))
+fun headScript url = return (Script.head (blessMime "text/javascript") (bless url))
+fun bodyScript url = return (Script.body (blessMime "text/javascript") (bless url))
 
-fun handler r = return <xml><body>
-    <table>
-    <tr> <th>Full name:</th> <td>{[r.FullName]}</td> </tr>
-    <tr> <th>Phone:</th> <td>{[r.Phone]}</td> </tr>
-    <tr> <th>Email:</th> <td>{[r.Email]}</td> </tr>
-    <tr> <th>People:</th> <td>{[r.People]}</td> </tr>
-    <tr> <th>Date:</th> <td>{[r.Date]}</td> </tr>
-    <tr> <th>ClientType:</th> <td>{[r.ClientType]}</td> </tr>
-  </table>
-  </body></xml>
+fun getPeople i = 
+  case i of
+      "1" => "1-50"
+    | "2" => "50-100"
+    | "3" => "100-150"
+    | "4" => "150-200"
+    | "5" => "200+"
+    | _   => "Invalid people option"
+
+fun sendEmail r =
+  Mail.send(Mail.from r.Email (Mail.to "clients@memboo.ro" (Mail.subject (strcat "Cerere oferta: " r.Email) Mail.empty)))
+            ("Nume si prenume: " ^ r.FullName ^ "</br>Telefon: " ^ r. Phone ^ "</br>Email: " ^ r.Email ^ "</br>Numar persoane: " ^ (getPeople r.People) ^ "</br>Data: " ^ r.Date ^ "</br>Tipul clientului: " ^ r.ClientType) None;
+  return <xml>Sent</xml>
 
 fun main () = 
-  gaScript <- js "https://www.googletagmanager.com/gtag/js?id=UA-123401300-1";
-  initGaScript <- js "/scripts.js";
-  jquery <- js "https://code.jquery.com/jquery-3.2.1.slim.min.js";
-  popper <- js "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js";
-  bootstrap <- js "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js";
-  parallax <- js "/parallax.min.js";
+  gaScript <- headScript "https://www.googletagmanager.com/gtag/js?id=UA-123401300-1";
+  initGaScript <- headScript "/initGa.js";
+  jquery <- bodyScript "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js";
+  popper <- bodyScript "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js";
+  bootstrap <- bodyScript "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js";
+  parallax <- bodyScript "/parallax.min.js";
+  flickity <- bodyScript "/flickity.pkgd.min.js";
+  scripts <- bodyScript "/scripts.js";
   id <- fresh;
   sectionQuoteId <- fresh;
   quoteFormId <- fresh;
@@ -33,6 +42,7 @@ fun main () =
   quoteFormPeopleId <- fresh;
   quoteFormDateId <- fresh;
   quoteFormClientType <- fresh;
+  copyrightId <- fresh;
   return 
     <xml>
       <head>
@@ -47,15 +57,12 @@ fun main () =
         {gaScript}
         {initGaScript}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="/style.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"/>
-        {jquery}
-        {popper}
-        {bootstrap}
-        {parallax}
+        <link rel="stylesheet" href="/flickity.min.css"/>
+        <link rel="stylesheet" href="/style.css"/>
       </head>
       <body data-spy="scroll" data-offset="71" data-target=".navbar:visible">
-        <nav class={classes (classes Bs4.navbar Bs4.navbar_expand_lg) (classes Bs4.fixed_top Bs4.navbar_light)}>
+        <nav class={classes (classes Bs4.navbar Bs4.navbar_expand_lg) Bs4.fixed_top}>
           <div class={Bs4.container}>
             <a class={classes Bs4.navbar_brand Bs4.d_lg_none} href="/">Memboo</a>
             <button class={Bs4.navbar_toggler} data-toggle="collapse" data-target={strcat "#" (show id)} aria-controls={show id} aria-expanded="false" aria-label="Toggle navigation">
@@ -185,7 +192,7 @@ fun main () =
             <div class={Bs4.row}>
               <div class={Css.col}>
                 <h2 class={classes Css.sectionTitle Bs4.text_center}>
-                Cere o ofera
+                Cere o oferta
                 </h2>
                 <p class={classes Css.sectionDescription Bs4.text_center}>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
@@ -198,7 +205,7 @@ fun main () =
                   <div class={Bs4.row}>
                     <div class={Bs4.col_md_6}>
                       <div class={Bs4.form_group}>
-                        <label for={quoteFormNameId}/>
+                        <label class={Bs4.sr_only} for={quoteFormNameId}>Nume si prenume</label>
                         <textbox{#FullName} class={Bs4.form_control} id={quoteFormNameId} placeholder="Nume si prenume"/>
                         <div class={Bs4.invalid_feedback}></div>
                       </div>
@@ -241,9 +248,7 @@ fun main () =
                     </div>
                     <div class={Css.col}>
                       <div class={Bs4.text_center}>
-                        <submit class={classes Bs4.btn Bs4.btn_primary} action={handler}>
-                          Cere ofera
-                        </submit>
+                        <submit class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)} action={sendEmail} value="Trimite"></submit>
                       </div>
                     </div>
                   </div>
@@ -252,5 +257,142 @@ fun main () =
             </div>
           </div>
         </section>
+        <section class={classes Css.css_section Css.borderBottom}>
+          <div class={Bs4.container}>
+            <div class={Bs4.row}>
+              <div class={Css.col}>
+                <h2 class={classes  Css.sectionTitle Bs4.text_center}>
+                  Parerea clientilor nostri conteaza
+                </h2>
+                <p class={classes Css.sectionDescription Bs4.text_center}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </p>
+        
+              </div>
+            </div>
+            <div class={Bs4.row}>
+              <div class={Css.col}>
+                <div class={classes Css.sectionFeedback__carousel (classes Flky.flickity_enabled Flky.is_draggable)}>
+                  <div class={classes Css.sectionFeedback__carousel__item (classes Bs4.text_center Bs4.text_md_left)}>
+                    <div class={classes Bs4.row Css.alignCenter}>
+                      <div class={classes Bs4.col_md_3 Bs4.order_md_3}>
+                        <div class={Css.sectionFeedbackPhoto}>
+                          <img src="/bebe1.png" class={Flky.img_fluid} alt="..."/>
+                        </div>
+                      </div>
+                      <div class={classes Bs4.col_md_7 Bs4.order_md_2}>
+                        <blockquote class={classes Css.sectionFeedbackQuote Bs4.mx_auto}>
+                          <p>
+                            Taticul meu e un om de incredere si cu suflet bun. Face poze de neuitat dar nu pe gratis, ca are si el nevoie de bani sa-mi cumpere jucarii.
+                          </p>
+                          <footer class={Bs4.text_muted}>
+                            Matei Popovici
+                          </footer>
+                        </blockquote>
+                      </div>
+                      <div class={classes Bs4.col_md_1 Bs4.order_md_1}></div>
+                    </div>
+                  </div>
+                  <div class={classes Css.sectionFeedback__carousel__item (classes Bs4.text_center (classes Bs4.text_md_left Flky.is_selected))}>
+                    <div class={classes Bs4.row Css.alignCenter}>
+                      <div class={classes Bs4.col_md_3 Bs4.order_md_3}>
+                        <div class={Css.sectionFeedbackPhoto}>
+                          <img src="/bebe2.png" class={Flky.img_fluid} alt="..."/>
+                        </div>
+                      </div>
+                      <div class={classes Bs4.col_md_7 Bs4.order_md_2}>
+                        <blockquote class={classes Css.sectionFeedbackQuote Bs4.mx_auto}>
+                          <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos at veritatis vitae modi ex quis quibusdam error repudiandae adipisci dolore perspiciatis iste, vel fuga a, libero architecto ratione deleniti sequi.
+                          </p>
+                          <footer class={Bs4.text_muted}>
+                            Matei Popovici
+                          </footer>
+                        </blockquote>
+                      </div>
+                      <div class={classes Bs4.col_md_1 Bs4.order_md_1}></div>
+                    </div>
+                  </div>
+                  <div class={classes Css.sectionFeedback__carousel__item (classes Bs4.text_center Bs4.text_md_left)}>
+                    <div class={classes Bs4.row Css.alignCenter}>
+                      <div class={classes Bs4.col_md_3 Bs4.order_md_3}>
+                        <div class={Css.sectionFeedbackPhoto}>
+                          <img src="/bebe3.png" class={Flky.img_fluid} alt="..."/>
+                        </div>
+                      </div>
+                      <div class={classes Bs4.col_md_7 Bs4.order_md_2}>
+                        <blockquote class={classes Css.sectionFeedbackQuote Bs4.mx_auto}>
+                          <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos at veritatis vitae modi ex quis quibusdam error repudiandae adipisci dolore perspiciatis iste, vel fuga a, libero architecto ratione deleniti sequi.
+                          </p>
+                          <footer class={Bs4.text_muted}>
+                            Matei Popovici
+                          </footer>
+                        </blockquote>
+                      </div>
+                      <div class={classes Bs4.col_md_1 Bs4.order_md_1}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class={classes Css.css_section Css.sectionFooter}>
+          <div class={Bs4.container}>
+            <div class={Bs4.row}>
+              <div class={Bs4.col_sm_4}>
+                <h5 class={Css.sectionFooterTitle}>
+                  Despre noi
+                </h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti dolorum, sint corporis nostrum, possimus unde eos vitae eius quasi saepe.
+                </p>
+              </div>
+              <div class={Bs4.col_sm_4}>
+                <h5 class={Css.sectionFooterTitle}>
+                  Informatii de contact
+                </h5>
+                <ul class={Css.sectionFooterDesc}>
+                  <li>
+                    <i class={classes FA.fa FA.fa_map_marker}></i> Romania, Cluj, Cluj-Napoca, Dorobantilor 105, 54001
+                  </li>
+                  <li>
+                    <i class={classes FA.fa FA.fa_phone}></i> +40741169887
+                  </li>
+                  <li>
+                    <i class={classes FA.fa FA.fa_envelope_o}></i> <a href="mailto:client@memboo.ro">client@memboo.ro</a>
+                  </li>
+                </ul>
+              </div>
+              <div class={Bs4.col_sm_4}>
+                <h5 class={Css.sectionFooterTitle}>
+                  Interval orar
+                </h5>
+                <div class={Css.sectionFooterOpen}>
+                  <div class={Css.sectionFooterOpenDays}>Luni - Vineri</div>
+                  <div class={Css.sectionFooterOpenTime}>09:00 AM - 18:00 PM</div>
+                </div>
+                <div class={Css.sectionFooterOpen}>
+                  <div class={Css.sectionFooterOpenDays}>Sambata - Duminica</div>
+                  <div class={Css.sectionFooterOpenTime}>09:00 AM - 13:00 PM</div>
+                </div>
+              </div>
+            </div>
+            <div class={Bs4.row}>
+              <div class={Bs4.col_12}>
+                <div class={Css.sectionFooterCopyright}>
+                  <i class={classes FA.fa FA.fa_copyright}></i> <span id={copyrightId}>2018</span> Memboo. All rights reserved.
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+        {jquery}
+        {popper}
+        {bootstrap}
+        {parallax}
+        {flickity}
+        {scripts}
       </body>
     </xml>
