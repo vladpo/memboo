@@ -390,6 +390,64 @@ val galleryContent =
         </div>
         {ifc}
       </section>
+      <section class={classes Css.css_section section_gallery">
+        <div class={Bs4.container}>
+          <div class={Bs4.row}>
+            <div class={Css.col}>
+              <h2 class={classes Css.sectionTitle Bs4.text_center}>
+                Galeria noastra
+              </h2>
+              <p class={Css.sectionDescription Bs4.text_center}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </div>
+          <div class={classes Bs4.row Css.sectionGallery__grid}>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe4.jpg" data-lightbox="gallery">
+                <img src="/bebe4.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe5.jpg" data-lightbox="gallery">
+                <img src="/bebe5.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe6.jpg" data-lightbox="gallery">
+                <img src="/bebe6.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+
+              <a href="/bebe7.jpg" data-lightbox="gallery">
+                <img src="/bebe7.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe8.jpg" data-lightbox="gallery">
+                <img src="/bebe8.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe9.jpg" data-lightbox="gallery">
+                <img src="/bebe9.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe10.jpg" data-lightbox="gallery">
+                <img src="/bebe10.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+
+              <a href="/bebe11.jpg" data-lightbox="gallery">
+                <img src="/bebe12.jpg" class={Flky.img_fluid} alt="...">
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </xml>
 
 fun main () = 
@@ -464,10 +522,10 @@ and navbarContent () =
         </nav>
     </xml>
 
-  and navItem h t = 
-    return 
-      <xml>
-        <li class={Bs4.nav_item}>
-          <a class={Bs4.nav_link} href={url (h ())}>{t}</a>
-        </li>
-      </xml>
+and navItem h t = 
+  return 
+    <xml>
+      <li class={Bs4.nav_item}>
+        <a class={Bs4.nav_link} href={url (h ())}>{t}</a>
+      </li>
+    </xml>
