@@ -20,9 +20,14 @@ fun getPeople i =
     | "5" => "200+"
     | _   => "Invalid people option"
 
-fun sendEmail r =
+fun sendOfferEmail r =
   Mail.send(Mail.from r.Email (Mail.to "clients@memboo.ro" (Mail.subject (strcat "Cerere oferta: " r.Email) Mail.empty)))
             ("Nume si prenume: " ^ r.FullName ^ "</br>Telefon: " ^ r. Phone ^ "</br>Email: " ^ r.Email ^ "</br>Numar persoane: " ^ (getPeople r.People) ^ "</br>Data: " ^ r.Date ^ "</br>Tipul clientului: " ^ r.ClientType) None;
+  return <xml>Sent</xml>
+
+fun sendMessageEmail r =
+  Mail.send(Mail.from r.Email (Mail.to "clients@memboo.ro" (Mail.subject (strcat "Mesaj de la " r.Email) Mail.empty)))
+            ("Nume si prenume: " ^ r.FullName ^ "</br>Email: " ^ r.Email) None;
   return <xml>Sent</xml>
 
 val headContent = 
@@ -281,7 +286,7 @@ val indexContent =
                   </div>
                   <div class={Css.col}>
                     <div class={Bs4.text_center}>
-                      <submit class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)} action={sendEmail} value="Trimite"></submit>
+                      <submit class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)} action={sendOfferEmail} value="Trimite"></submit>
                     </div>
                   </div>
                 </div>
@@ -373,77 +378,108 @@ val indexContent =
     </xml>
 
 val galleryContent = 
-  ifc <- introFooterContent;
+  return <xml>Galerie</xml>
+
+val contactContent = 
+  contactFormId <- fresh;
+  contactFormNameId <- fresh;
+  contactFormEmailId <- fresh;
+  contactFormMessageId <- fresh;
   return 
     <xml>
-      <section class={classes Css.css_section Css.sectionIntro} data-parallax="scroll" data-image-src="/main.jpg">
-        <div class={Css.sectionIntroMid}>
-          <div class={Bs4.container}>
-            <div class={classes Bs4.row Css.alignCenter}>
-              <div class={Css.col}>
-                <h1 class={classes Css.sectionTitle (classes Css.sectionIntroTitle Bs4.text_center)}>
-                  Galeria noastra
-                </h1>
-              </div>
+      <section class={classes Css.css_section Css.sectionHeader} data-parallax="scroll" data-image-src="/contact.jpg">
+        <div class={Bs4.container}>
+          <div class={Bs4.row}>
+            <div class={Css.col}>
+              <h1 class={classes Css.sectionTitle (classes Css.sectionHeaderTitle Bs4.text_center)}>
+                Contactati-ne
+              </h1>
             </div>
           </div>
         </div>
-        {ifc}
       </section>
-      <section class={classes Css.css_section section_gallery">
+      <section class={classes Css.css_section Css.sectionContact}>
         <div class={Bs4.container}>
           <div class={Bs4.row}>
             <div class={Css.col}>
               <h2 class={classes Css.sectionTitle Bs4.text_center}>
-                Galeria noastra
+                Scrie-ne un mesaj
               </h2>
-              <p class={Css.sectionDescription Bs4.text_center}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              <p class={classes Css.sectionDescription Bs4.text_center}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
               </p>
             </div>
           </div>
-          <div class={classes Bs4.row Css.sectionGallery__grid}>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-              <a href="/bebe4.jpg" data-lightbox="gallery">
-                <img src="/bebe4.jpg" class={Flky.img_fluid} alt="...">
-              </a>
+          <div class={Bs4.row}>
+            <div class={classes Bs4.col_md_3 Bs4.order_md_2}>
+              <div class={Css.sectionContactInfo}>
+                <div class={Css.sectionContactInfoItem}>
+                  <h4 class={Css.sectionContactInfoItemHeading}>
+                    Scrie-ne
+                  </h4>
+                  <p class={Css.sectionContactInfoItemContent}>
+                    <a href="mailto:clients@memboo.ro">clients@memboo.ro</a>
+                  </p>
+                </div>
+                <div class={Css.sectionContactInfoItem}>
+                  <h4 class={Css.sectionContactInfoItemHeading}>
+                    Suna
+                  </h4>
+                  <p class={Css.sectionContactInfoItemContent}>
+                    <a href="tel:+19876543210">+1 987 654 3210</a>
+                  </p>
+                </div>
+                <div class={Css.sectionContactInfoItem}>
+                  <h4 class={Css.sectionContactInfoItemHeading}>
+                    Visiteaza-ne
+                  </h4>
+                  <p class={Css.sectionContactInfoItemContent}>
+                    Cluj-Napoca, Dorobantilor Nr. , 540001
+                  </p>
+                </div>
+                <div class={Css.sectionContactInfoItem}>
+                  <h4 class={Css.sectionContactInfoItemHeading}>
+                    Linkuri sociale
+                  </h4>
+                  <ul class={Css.sectionContactInfoItemContent}>
+                    <li>
+                      <a href="#">
+                        <i class={classes FA.fab FA.fa_twitter}></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class={classes FA.fab FA.fa_facebook}></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class={classes FA.fab FA.fa_instagram}></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-              <a href="/bebe5.jpg" data-lightbox="gallery">
-                <img src="/bebe5.jpg" class={Flky.img_fluid} alt="...">
-              </a>
-            </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-              <a href="/bebe6.jpg" data-lightbox="gallery">
-                <img src="/bebe6.jpg" class={Flky.img_fluid} alt="...">
-              </a>
-            </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-
-              <a href="/bebe7.jpg" data-lightbox="gallery">
-                <img src="/bebe7.jpg" class={Flky.img_fluid} alt="...">
-              </a>
-            </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-              <a href="/bebe8.jpg" data-lightbox="gallery">
-                <img src="/bebe8.jpg" class={Flky.img_fluid} alt="...">
-              </a>
-            </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-              <a href="/bebe9.jpg" data-lightbox="gallery">
-                <img src="/bebe9.jpg" class={Flky.img_fluid} alt="...">
-              </a>
-            </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-              <a href="/bebe10.jpg" data-lightbox="gallery">
-                <img src="/bebe10.jpg" class={Flky.img_fluid} alt="...">
-              </a>
-            </div>
-            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
-
-              <a href="/bebe11.jpg" data-lightbox="gallery">
-                <img src="/bebe12.jpg" class={Flky.img_fluid} alt="...">
-              </a>
+            <div class={classes Bs4.col_md_9 Bs4.order_md_1}>
+              <form class={Css.sectionContactForm} id={contactFormId}>
+                <div class={Bs4.form_group}>
+                  <label class={Bs4.sr_only} for={contactFormNameId}/>
+                  <textbox{#FullName} class={Bs4.form_control} id={contactFormNameId} placeholder="Nume si prenume"/>
+                  <div class={Bs4.invalid_feedback}></div>
+                </div>
+                <div class={Bs4.form_group}>
+                  <label class={Bs4.sr_only} for={contactFormEmailId}/>
+                  <email{#Email} class={Bs4.form_control} id={contactFormEmailId} placeholder="Adresa de email"/>
+                  <div class={Bs4.invalid_feedback}></div>
+                </div>
+                <div class={Bs4.form_group}>
+                  <label class={Bs4.sr_only} for={contactFormMessageId}/>
+                  <textarea{#Message} class={Bs4.form_control} id={contactFormMessageId} rows=9 placeholder="Mesaj"></textarea>
+                  <div class={Bs4.invalid_feedback}></div>
+                </div>
+                <submit value="Trimite mesajul" class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)} action={sendMessageEmail}/>
+              </form>
             </div>
           </div>
         </div>
@@ -462,7 +498,8 @@ and galleryPage () =
   return <xml>{pg}</xml>
 
 and contactPage () =
-  return <xml>Contact</xml>
+  cc <- (membooPage contactContent);
+  return <xml>{cc}</xml>
 
 and membooPage pageContent = 
   hc <- headContent;

@@ -43,3 +43,11 @@ style sectionFooterTime
 style sectionFooterOpenDays
 style sectionFooterOpenTime
 style sectionFooterCopyright
+style sectionHeader
+style sectionContactInfo
+style sectionContactInfoItem
+style sectionContactInfoItemHeading
+style sectionContactInfoItemContent
+style sectionContactForm
+style sectionContact
+style sectionHeaderTitle

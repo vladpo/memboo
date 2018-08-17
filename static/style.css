@@ -47,6 +47,10 @@ address, dl, ol, ul {
     margin-bottom: 1rem;
 }
 
+a, a:hover {
+    color: #f5a637;
+}
+
 .btn-primary {
 	background-color: transparent;
 }
@@ -308,6 +312,22 @@ address, dl, ol, ul {
     background-color: transparent;
 }
 
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-light .navbar-brand, .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: #f5a637;
+}
+
+.navbar-light .navbar-brand, .navbar-light .navbar-brand:active, .navbar-light .navbar-brand:active:focus, .navbar-light .navbar-brand:active:hover, .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #f5a637;
+}
+
 .navbar-dark {
     background-color: transparent;
 }
@@ -429,4 +449,88 @@ address, dl, ol, ul {
 
 .sectionFooter a, .sectionFooter a:active, .sectionFooter a:active:focus, .sectionFooter a:active:hover, .sectionFooter a:focus, .sectionFooter a:hover {
     color: #777;
+}
+
+.sectionContactForm {
+	position:relative;
+}
+
+.sectionContactInfo {
+	margin-bottom:2rem;
+	padding:0 1rem
+}
+
+.sectionContactInfoItem {
+	margin-bottom:1rem;
+}
+
+.sectionContactInfoItem+.sectionContactInfoItem {
+	padding-top:1rem;
+	border-top:1px solid #f0f0f0;
+}
+
+.sectionContactInfoItemHeading {
+	font-family:Lato,sans-serif;
+	font-size:.75rem;
+	font-weight:900;
+	letter-spacing:.05em;
+	text-transform:uppercase;
+}
+
+.sectionContactInfoItemContent {
+	font-family:Playfair Display,serif;
+}
+
+.sectionContactInfoItemContent a[href*=tel] {
+	color:#777;
+}
+
+.sectionContactInfoItemContent a[href*=tel]:active,
+.sectionContactInfoItemContent a[href*=tel]:active:focus,
+.sectionContactInfoItemContent a[href*=tel]:active:hover,
+.sectionContactInfoItemContent a[href*=tel]:focus,
+.sectionContactInfoItemContent a[href*=tel]:hover {
+	text-decoration:none;
+}
+
+ul.sectionContactInfoItemContent {
+	padding-left:0;
+	list-style-type:none;
+}
+
+ul.sectionContactInfoItemContent>li {
+	display:inline-block;
+}
+
+ul.sectionContactInfoItemContent>li>a {
+	line-height:1.5rem;
+	display:block;
+	width:1.5rem;
+	height:1.5rem;
+	text-align:center;
+	color:#fff;
+	background-color:#f5a637;
+}
+
+ul.sectionContactInfoItemContent>li>a:hover {
+	background-color:#f5a637;
+}
+
+ul.sectionContactInfoItemContent>li+li {
+	margin-left:3px;
+}
+
+@media (min-width: 768px)
+.sectionHeader {
+    padding: calc(70px + 9rem) 0 9rem;
+}
+
+.sectionHeader {
+    padding: calc(70px + 3rem) 0 3rem;
+}
+
+.sectionHeaderTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
 }
