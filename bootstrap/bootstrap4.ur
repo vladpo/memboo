@@ -604,3 +604,4 @@ style order_md_1
 style mx_auto
 style arrow
 style col_12
+style col_6

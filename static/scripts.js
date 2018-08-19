@@ -90,4 +90,15 @@ Feedback=function(){
 		function(){
 			$(this).flickity({cellAlign:"left",wrapAround:!0,imagesLoaded:!0})
 		})
+}(),
+Gallery=function(){
+	var e=$(".sectionGallery__grid"),t=".sectionGallery__grid__item";
+	e.length&&e.each(
+		function(){
+			var e=$(this).isotope({itemSelector:t});
+			e.imagesLoaded().progress(
+				function(){
+					e.isotope("layout")
+				})
+		})
 }();

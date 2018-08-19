@@ -1,4 +1,3 @@
-
 open Css
 open Tags
 open Mail
@@ -30,6 +29,12 @@ fun sendMessageEmail r =
             ("Nume si prenume: " ^ r.FullName ^ "</br>Email: " ^ r.Email) None;
   return <xml>Sent</xml>
 
+fun  navItemClass i j = 
+  if i = j then 
+    classes Bs4.nav_item Bs4.bs_active
+  else
+    Bs4.nav_item
+
 val headContent = 
   gaScript <- headScript "https://www.googletagmanager.com/gtag/js?id=UA-123401300-1";
   initGaScript <- headScript "/initGa.js";
@@ -46,9 +51,10 @@ val headContent =
         <link rel="dns-prefetch" href="//s.w.org" />
         {gaScript}
         {initGaScript}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"/>
         <link rel="stylesheet" href="/flickity.min.css"/>
+        <link rel="stylesheet" href="/lightbox.min.css"/>
         <link rel="stylesheet" href="/style.css"/>
       </head>
     </xml>
@@ -133,10 +139,12 @@ val footerContent =
     </xml>
 
 val scriptsContent = 
-  jquery <- bodyScript "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js";
+  jquery <- bodyScript "/jquery-1.7.min.js";
   bootstrap <- bodyScript "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js";
   parallax <- bodyScript "/parallax.min.js";
   flickity <- bodyScript "/flickity.pkgd.min.js";
+  isotope <- bodyScript "/isotope.pkgd.min.js";
+  lightbox <- bodyScript "/lightbox.min.js";
   scripts <- bodyScript "/scripts.js";
   return 
     <xml>
@@ -144,6 +152,8 @@ val scriptsContent =
       {bootstrap}
       {parallax}
       {flickity}
+      {isotope}
+      {lightbox}
       {scripts}
     </xml>
 
@@ -171,7 +181,7 @@ val indexContent =
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non illo, alias animi iusto neque, sint corrupti? Laudantium, dignissimos id excepturi facilis, facere saepe quasi placeat praesentium ipsa sapiente illo molestiae?
                 </p>
                 <div class={Bs4.text_center}>
-                  <a href={bless(strcat "#" (show sectionQuoteId))} class={classes Bs4.btn (classes Bs4.btn_primary Css.textBlack)}>
+                  <a href={bless(strcat "#" (show sectionQuoteId))} class={classes Bs4.btn (classes Bs4.btn_primary Css.textWhite)}>
                     Aplica pentru o oferta
                   </a>
                 </div>
@@ -377,10 +387,130 @@ val indexContent =
       </section>
     </xml>
 
+val aboutUsContent = 
+  ifc <- introFooterContent;
+  return
+    <xml>
+      <section class={classes Css.css_section Css.sectionHeader} data-parallax="scroll" data-image-src="/about-us.jpg">
+        <div class={Bs4.container}>
+          <div class={Bs4.row}>
+            <div class={Css.col}>
+              <h1 class={classes Css.sectionTitle (classes Css.sectionHeaderTitle Bs4.text_center)}>
+                Despre noi
+              </h1>
+            </div>
+          </div>
+        </div>
+        {ifc}
+      </section>
+      <section class={classes Css.css_section Css.sectionAboutUs}>
+        <div class={Bs4.container}>
+          <div class={Bs4.row}>
+            <div class={classes Bs4.col_md_2 Css.alignSelfStart}>
+              <p class={Css.sectionAboutUsDescription}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+            <div class={classes Bs4.col_md_4 Css.alignSelfStart}>
+              <div class={Css.sectionAboutUsImg}>
+                <img src="/bebe2.png" class={Flky.img_fluid} alt="..."/>
+              </div>
+            </div>
+            <div class={classes Bs4.col_md_6 Css.alignSelfCenter}>
+              <h2><em>Lorem ipsum</em> dolor sit amet</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis nisi, consequatur, laborum libero a neque ducimus. Porro rem illum quo nostrum quisquam asperiores, blanditiis, consectetur. Possimus facilis velit, voluptatibus!
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis deleniti non, voluptate architecto, harum suscipit dignissimos eaque voluptatibus nobis natus error iure exercitationem. Officia facilis, maiores atque delectus commodi rerum.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur qui, itaque, accusantium accusamus eum voluptate ducimus eligendi laboriosam alias mollitia omnis harum et ut quaerat, minus repellendus sint. Inventore, iure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </xml>
+
 val galleryContent = 
-  return <xml>Galerie</xml>
+  ifc <- introFooterContent;
+  return 
+    <xml>
+      <section class={classes Css.css_section Css.sectionHeader} data-parallax="scroll" data-image-src="/gallery.png">
+        <div class={Bs4.container}>
+          <div class={classes Bs4.row Css.alignCenter}>
+            <div class={Css.col}>
+              <h1 class={classes Css.sectionTitle (classes Css.sectionHeaderTitle Bs4.text_center)}>
+                Galeria noastra
+              </h1>
+            </div>
+          </div>
+        </div>
+        {ifc}
+      </section>
+      <section class={classes Css.css_section Css.sectionGallery}>
+        <div class={Bs4.container}>
+          <div class={Bs4.row}>
+            <div class={Css.col}>
+              <h2 class={classes Css.sectionTitle Bs4.text_center}>
+                Galeria noastra
+              </h2>
+              <p class={classes Css.sectionDescription Bs4.text_center}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </div>
+          <div class={classes Bs4.row Css.sectionGallery__grid}>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe4.jpg" data-lightbox="gallery">
+                <img src="/bebe4.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe5.jpg" data-lightbox="gallery">
+                <img src="/bebe5.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe6.jpg" data-lightbox="gallery">
+                <img src="/bebe6.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+
+              <a href="/bebe7.jpg" data-lightbox="gallery">
+                <img src="/bebe7.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe8.jpg" data-lightbox="gallery">
+                <img src="/bebe8.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe9.jpg" data-lightbox="gallery">
+                <img src="/bebe9.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+              <a href="/bebe10.jpg" data-lightbox="gallery">
+                <img src="/bebe10.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+            <div class={classes Bs4.col_6 (classes Bs4.col_sm_6 (classes Bs4.col_md_4 Css.sectionGallery__grid__item))}>
+
+              <a href="/bebe11.jpg" data-lightbox="gallery">
+                <img src="/bebe11.jpg" class={Flky.img_fluid} alt="..."/>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </xml>
 
 val contactContent = 
+  ifc <- introFooterContent;
   contactFormId <- fresh;
   contactFormNameId <- fresh;
   contactFormEmailId <- fresh;
@@ -397,6 +527,7 @@ val contactContent =
             </div>
           </div>
         </div>
+        {ifc}
       </section>
       <section class={classes Css.css_section Css.sectionContact}>
         <div class={Bs4.container}>
@@ -485,27 +616,28 @@ val contactContent =
         </div>
       </section>
     </xml>
-
+    
 fun main () = 
-  pi <- (membooPage indexContent);
+  pi <- (membooPage (0, indexContent));
   return <xml>{pi}</xml>
 
 and aboutUsPage () =
-  return <xml>About Us</xml>
+  auc <- (membooPage (1, aboutUsContent));
+  return <xml>{auc}</xml>
 
 and galleryPage () =
-  pg <- (membooPage galleryContent);
+  pg <- (membooPage (2, galleryContent));
   return <xml>{pg}</xml>
 
 and contactPage () =
-  cc <- (membooPage contactContent);
+  cc <- (membooPage (3, contactContent));
   return <xml>{cc}</xml>
 
-and membooPage pageContent = 
+and membooPage (i, pageContent) = 
   hc <- headContent;
   fc <- footerContent;
   sc <- scriptsContent;
-  nbc <- (navbarContent ());
+  nbc <- (navbarContent i);
   pc <- pageContent;
   return 
     <xml>
@@ -513,11 +645,11 @@ and membooPage pageContent =
       <body data-spy="scroll" data-offset="71" data-target=".navbar:visible">{nbc}{pc}{fc}{sc}</body>
     </xml>
 
-and navbarContent () = 
+and navbarContent (pageIndex: int) = 
   navbarId <- fresh;
-  niAboutUs <- navItem aboutUsPage <xml>Despre noi</xml>;
-  niGallery <- navItem galleryPage <xml>Galerie</xml>;
-  niContact <- navItem contactPage <xml>Contact</xml>;
+  niAboutUs <- navItem aboutUsPage <xml>Despre noi</xml> pageIndex 1;
+  niGallery <- navItem galleryPage <xml>Galerie</xml> pageIndex 2;
+  niContact <- navItem contactPage <xml>Contact</xml> pageIndex 3;
   return 
     <xml>
       <nav class={classes (classes Bs4.navbar Bs4.navbar_expand_lg) Bs4.fixed_top}>
@@ -559,10 +691,10 @@ and navbarContent () =
         </nav>
     </xml>
 
-and navItem h t = 
+and navItem h t pageIndex j = 
   return 
     <xml>
-      <li class={Bs4.nav_item}>
+      <li class={navItemClass pageIndex j}>
         <a class={Bs4.nav_link} href={url (h ())}>{t}</a>
       </li>
     </xml>

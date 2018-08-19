@@ -51,3 +51,9 @@ style sectionContactInfoItemContent
 style sectionContactForm
 style sectionContact
 style sectionHeaderTitle
+style sectionGallery
+style sectionGallery__grid
+style sectionGallery__grid__item
+style sectionAboutUsDescription
+style sectionAboutUsImg
+style sectionAboutUs
