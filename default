@@ -1,5 +1,5 @@
 upstream memboo {
-  server localhost:9999;
+  server 127.0.0.1:9999;
 }
 
 server {
@@ -7,7 +7,7 @@ server {
     listen                        [::]:80 default_server ipv6only=on;
     listen                        443 ssl;
 
-    server_name                   www.memboo.ro memboo.ro;
+    server_name                   www.memorybooth.ro memorybooth.ro;
     root                          /var/www/memboo/static/;
 
     location / {
