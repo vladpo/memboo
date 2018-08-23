@@ -8,7 +8,7 @@
 # Description:       Memory booth web site
 ### END INIT INFO
 
-SCRIPT="/home/membooadmin/workspace/memboo/memboo.exe -a 127.0.0.1 -p 9999 -t 2" 
+SCRIPT="/home/membooadmin/workspace/memboo-setup/memboo/memboo.exe -a 127.0.0.1 -p 9999 -t 2" 
 RUNAS="membooadmin"
 
 PIDFILE=/var/run/memboo.pid
