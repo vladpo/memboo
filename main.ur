@@ -68,14 +68,9 @@ val introFooterContent =
               <div class={Css.colMd}>
                 <ul>
                   <li>
-                    <i class={classes FA.fa FA.fa_phone}></i> +40741169887
+                    <i class={classes FA.fa FA.fa_phone}></i> +40743478982
                   </li>
                 </ul>
-              </div>
-              <div class={Css.colMd}>
-                <div class={classes Css.sectionIntroFooterAddr (classes Bs4.text_center Css.textLgRight)}>
-                  <i class={classes FA.fa FA.fa_map_marker}></i> Cluj-Napoca, Dorobantilor 105, 54005
-                </div>
               </div>
             </div>
           </div>
@@ -94,7 +89,7 @@ val footerContent =
                 Despre noi
               </h5>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti dolorum, sint corporis nostrum, possimus unde eos vitae eius quasi saepe.
+                We create memories! Memory Booth s-a născut din dorința de a transforma orice eveniment într-unul memorabil. 
               </p>
             </div>
             <div class={Bs4.col_sm_4}>
@@ -103,13 +98,13 @@ val footerContent =
               </h5>
               <ul class={Css.sectionFooterDesc}>
                 <li>
-                  <i class={classes FA.fa FA.fa_map_marker}></i> Romania, Cluj, Cluj-Napoca, Dorobantilor 105, 54001
+                  <i class={classes FA.fa FA.fa_map_marker}></i> Romania, Cluj, Cluj-Napoca, Plevnei 117
                 </li>
                 <li>
-                  <i class={classes FA.fa FA.fa_phone}></i> +40741169887
+                  <i class={classes FA.fa FA.fa_phone}></i> +40743478982
                 </li>
                 <li>
-                  <i class={classes FA.fa FA.fa_envelope_o}></i> <a href="mailto:client@memboo.ro">client@memboo.ro</a>
+                  <i class={classes FA.fa FA.fa_envelope_o}></i> <a href="mailto:popovici.silviu.dan@gmail.com">popovici.silviu.dan@gmail.com</a>
                 </li>
               </ul>
             </div>
@@ -130,7 +125,7 @@ val footerContent =
           <div class={Bs4.row}>
             <div class={Bs4.col_12}>
               <div class={Css.sectionFooterCopyright}>
-                <i class={classes FA.fa FA.fa_copyright}></i> <span id={copyrightId}>2018</span> Memboo. All rights reserved.
+                <i class={classes FA.fa FA.fa_copyright}></i> <span id={copyrightId}>2018</span> MemoryBooth. All rights reserved.
               </div>
             </div>
           </div>
@@ -172,16 +167,10 @@ val indexContent =
       <section class={classes Css.css_section Css.sectionIntro} data-parallax="scroll" data-image-src="/main.jpg">
         <div class={Css.sectionIntroMid}>
           <div class={Bs4.container}>
-            <div class={classes Bs4.row Css.alignCenter}>
+            <div class={classes Bs4.row Css.alignBottom}>
               <div class={Css.col}>
-                <h1 class={classes Css.sectionTitle (classes Css.sectionIntroTitle Bs4.text_center)}>
-                  Memboo
-                </h1>
-                <p class={classes Css.sectionIntroDescription (classes Bs4.text_center Bs4.text_muted)}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non illo, alias animi iusto neque, sint corrupti? Laudantium, dignissimos id excepturi facilis, facere saepe quasi placeat praesentium ipsa sapiente illo molestiae?
-                </p>
                 <div class={Bs4.text_center}>
-                  <a href={bless(strcat "#" (show sectionQuoteId))} class={classes Bs4.btn (classes Bs4.btn_primary Css.textWhite)}>
+                  <a href={bless(strcat "#" (show sectionQuoteId))} class={classes Bs4.btn (classes Bs4.btn_primary (classes Css.textWhite Css.btnOffer))}>
                     Aplica pentru o oferta
                   </a>
                 </div>
@@ -196,7 +185,7 @@ val indexContent =
           <div class={Bs4.row}>
             <div class={classes Bs4.col_md_2 Css.alignSelfStart}>
               <p class={Css.sectionHardwareDesc}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Cabina foto Magic Mirror Pro este un produs de ultimă generație, care oferă cea mai interactivă și atractivă interfață existentă la ora actuală pe piață.
               </p>
             </div>
             <div class={classes Bs4.col_md_4 Css.alignSelfStart}>
@@ -205,9 +194,10 @@ val indexContent =
               </div>
             </div>
             <div class={classes Bs4.col_md_6 Css.alignSelfCenter}>
-              <h2><em>Lorem ipsum</em> dolor sit amet</h2>
+              <h2><em>Magic Mirror Pro</em></h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis nisi, consequatur, laborum libero a neque ducimus. Porro rem illum quo nostrum quisquam asperiores, blanditiis, consectetur. Possimus facilis velit, voluptatibus!
+                Magic Mirror Pro promite o experiență deosebită prin animațiile colorate, posibilitatea de semnare a fotografiilor, realizarea de mesaje video pentru sărbătoriți, realizare GIF-uri, partajarea fotografiilor pe rețelele de socializare. 
+  Ramele decorative cu bandă led, de care dispunem, întregesc gama de avantaje la care oglinda magică răspunde.
               </p>
             </div>
           </div>
@@ -218,7 +208,7 @@ val indexContent =
           <div class={Bs4.row}>
             <div class={classes Bs4.col_md_2 (classes Css.order2 Css.alignSelfEnd)}>
               <p class={Css.sectionHardwareDesc}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Pe întreaga durată a închirierii, toți cei care vizitează oglinda se vor bucura de poze printate rapid și magneți, în număr nelimitat.
               </p>
             </div>
             <div class={classes Bs4.col_md_4 (classes Css.order3 Css.alignSelfStart)}>
@@ -227,9 +217,9 @@ val indexContent =
               </div>
             </div>
             <div class={classes Bs4.col_md_6 (classes Css.order1 Css.alignSelfCenter)}>
-              <h2><em>Lorem ipsum</em> dolor sit amet</h2>
+              <h2><em>Recuzita bogată</em></h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis nisi, consequatur, laborum libero a neque ducimus. Porro rem illum quo nostrum quisquam asperiores, blanditiis, consectetur. Possimus facilis velit, voluptatibus!
+                Accesoriile diverse și haioase sunt secretul unui eveniment reușit. Pentru ca invitații să aibă o experiență de neuitat venim în întâmpinarea lor cu o gamă diversă de accesorii și fundaluri. Iubim petrecerile tematice și putem personalize întreaga experiență cu ajutorul template-urilor pentru printuri custom made și a props-urilor.
               </p>
             </div>
           </div>
@@ -243,7 +233,7 @@ val indexContent =
               Cere o oferta
               </h2>
               <p class={classes Css.sectionDescription Bs4.text_center}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
+                Oferta pentru tine va fi personalizată! În funcție de amploarea evenimentului (număr participanți la eveniment), localitatea de desfășurare a acestuia și data la care va avea loc, noi îți vom face cea mai atractivă ofertă.
               </p>
             </div>
           </div>
@@ -312,9 +302,6 @@ val indexContent =
               <h2 class={classes  Css.sectionTitle Bs4.text_center}>
                 Parerea clientilor nostri conteaza
               </h2>
-              <p class={classes Css.sectionDescription Bs4.text_center}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>  
             </div>
           </div>
           <div class={Bs4.row}>
@@ -408,7 +395,7 @@ val aboutUsContent =
           <div class={Bs4.row}>
             <div class={classes Bs4.col_md_2 Css.alignSelfStart}>
               <p class={Css.sectionAboutUsDescription}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Memory Booth s-a născut din dorința de a transforma orice eveniment într-unul memorabil. 
               </p>
             </div>
             <div class={classes Bs4.col_md_4 Css.alignSelfStart}>
@@ -417,15 +404,15 @@ val aboutUsContent =
               </div>
             </div>
             <div class={classes Bs4.col_md_6 Css.alignSelfCenter}>
-              <h2><em>Lorem ipsum</em> dolor sit amet</h2>
+              <h2><em>We create memories!</em></h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis nisi, consequatur, laborum libero a neque ducimus. Porro rem illum quo nostrum quisquam asperiores, blanditiis, consectetur. Possimus facilis velit, voluptatibus!
+                Cu ajutorul oglindei magice putem să amplificăm distracția și să creăm momente unice, pe care apoi le vom transpune într-o amintire definitivă.
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis deleniti non, voluptate architecto, harum suscipit dignissimos eaque voluptatibus nobis natus error iure exercitationem. Officia facilis, maiores atque delectus commodi rerum.
+                Memory Booth oferă servicii profesionale de fotografiere și printare, livrând calitate într-o manieră distractivă, interactivă și deloc lipsită de inovație. Asta înseamnă că, punem la dispoziție Oglinda Magică…un must have pentru orice eveniment care se dorește a fi memorabil…împreună cu o gamă variată de props-uri, backdrops-uri și template-uri personalizate. Mai mult, vom ține cont de așteptările și dorințele ingenioase ale clienților nostri, oferindu-le  accesorii personalizate, în concordanță cu evenimentul lor concept.
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur qui, itaque, accusantium accusamus eum voluptate ducimus eligendi laboriosam alias mollitia omnis harum et ut quaerat, minus repellendus sint. Inventore, iure.
+                Suntem nerabdători să-ți transformăm evenimentul într-unul distractiv și, mai ales, MEMORABIL!
               </p>
             </div>
           </div>
@@ -456,9 +443,6 @@ val galleryContent =
               <h2 class={classes Css.sectionTitle Bs4.text_center}>
                 Galeria noastra
               </h2>
-              <p class={classes Css.sectionDescription Bs4.text_center}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
             </div>
           </div>
           <div class={classes Bs4.row Css.sectionGallery__grid}>
@@ -536,9 +520,6 @@ val contactContent =
               <h2 class={classes Css.sectionTitle Bs4.text_center}>
                 Scrie-ne un mesaj
               </h2>
-              <p class={classes Css.sectionDescription Bs4.text_center}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
-              </p>
             </div>
           </div>
           <div class={Bs4.row}>
@@ -549,7 +530,7 @@ val contactContent =
                     Scrie-ne
                   </h4>
                   <p class={Css.sectionContactInfoItemContent}>
-                    <a href="mailto:clients@memboo.ro">clients@memboo.ro</a>
+                    <a href="mailto:popovici.silviu.dan@gmail.com">popovici.silviu.dan@gmail.com</a>
                   </p>
                 </div>
                 <div class={Css.sectionContactInfoItem}>
@@ -557,7 +538,7 @@ val contactContent =
                     Suna
                   </h4>
                   <p class={Css.sectionContactInfoItemContent}>
-                    <a href="tel:+19876543210">+1 987 654 3210</a>
+                    <a href="tel:+40743478982">+40743478982</a>
                   </p>
                 </div>
                 <div class={Css.sectionContactInfoItem}>
@@ -565,7 +546,7 @@ val contactContent =
                     Visiteaza-ne
                   </h4>
                   <p class={Css.sectionContactInfoItemContent}>
-                    Cluj-Napoca, Dorobantilor Nr. , 540001
+                    Cluj-Napoca, Plevnei 117
                   </p>
                 </div>
                 <div class={Css.sectionContactInfoItem}>
@@ -654,7 +635,7 @@ and navbarContent (pageIndex: int) =
     <xml>
       <nav class={classes (classes Bs4.navbar Bs4.navbar_expand_lg) Bs4.fixed_top}>
           <div class={Bs4.container}>
-            <a class={classes Bs4.navbar_brand Bs4.d_lg_none} href="/">Memboo</a>
+            <a class={classes Bs4.navbar_brand Bs4.d_lg_none} href="/">Memory booth</a>
             <button class={Bs4.navbar_toggler} data-toggle="collapse" data-target={strcat "#" (show navbarId)} aria-controls={show navbarId} aria-expanded="false" aria-label="Toggle navigation">
               <span class={Bs4.navbar_toggler_icon}></span>
             </button>
@@ -663,7 +644,7 @@ and navbarContent (pageIndex: int) =
                 {niAboutUs}
                 {niGallery}
               </ul>
-              <a class={classes (classes Bs4.navbar_brand Bs4.d_none) Bs4.d_lg_flex} href="/">Memboo</a>
+              <a class={classes (classes Bs4.navbar_brand Bs4.d_none) Bs4.d_lg_flex} href="/">Memory booth</a>
               <ul class={classes Bs4.navbar_nav Bs4.ml_auto}>
                 {niContact}
                 <li class={Bs4.nav_item}>

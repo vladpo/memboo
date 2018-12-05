@@ -57,3 +57,5 @@ style sectionGallery__grid__item
 style sectionAboutUsDescription
 style sectionAboutUsImg
 style sectionAboutUs
+style btnOffer
+style alignBottom
